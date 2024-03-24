@@ -12,11 +12,11 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/" element=<HomePage /> ></Route>
-        <Route path="/beers" element=<AllBreersPage /> ></Route>
-        <Route path="/random-beer" element=<RandomBreersPage /> ></Route>
-        <Route path="/new-beer" element=<AddBeerPage /> ></Route>
-        <Route path="/beers/:beerId" element=<BeerDetailsPage /> ></Route>
+        <Route path="/" element={<HomePage />} ></Route>
+        <Route path="/beers" element={<AllBreersPage />} ></Route>
+        <Route path="/random-beer" element={<RandomBreersPage />} ></Route>
+        <Route path="/new-beer" element={<AddBeerPage />} ></Route>
+        <Route path="/beers/:beerId" element={<BeerDetailsPage />} ></Route>
       </Routes>
     </div>
   );
