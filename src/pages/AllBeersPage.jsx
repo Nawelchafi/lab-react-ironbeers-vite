@@ -4,19 +4,42 @@ import { useState, useEffect } from 'react'
 function AllBeersPage() {
     // state var for setting beets
     const [beers, setBeers] = useState([])
-    // function to get data from api
+    const [beersFromAPI, setBeersFromAPI] = useState([]);
+    const [searchBeer, setSearchBeer] = useState("");    // function to get data from api
     const getData = () => {
         axios.get('https://ih-beers-api2.herokuapp.com/beers').then((response) => {
             setBeers(response.data)
+            setBeersFromAPI(response.data);
         }).catch((error) => {
             console.error('Error fetching data:', error);
         });
     }
     // call use effect and pass data getter function
     useEffect(() => getData(), [])
+    useEffect(() => {
+        filterBeers();
+    }, [searchBeer]);
+
+    const filterBeers = () => {
+        const filteredBeers = beersFromAPI.filter((beer) => {
+            return beer.name.toLowerCase().includes(searchBeer.toLowerCase());
+        });
+        setBeers(filteredBeers);
+    };
+
+    const handleChange = (e) => {
+        const newBeer = e.target.value.toLowerCase();
+        setSearchBeer(newBeer);
+    };
 
     return (
         <div  >
+            <input
+                onChange={handleChange}
+                value={searchBeer}
+                placeholder="Search Beer"
+            />
+            <br />
             {beers.map((beer) => {
                 return (
 
