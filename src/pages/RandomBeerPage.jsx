@@ -1,3 +1,38 @@
-function RandomBeersPage() {}
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+const beersAPI = "https://ih-beers-api2.herokuapp.com/beers";
+
+function RandomBeersPage() {
+
+    const [beer, setBeer] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${beersAPI}/random`).then((result) => {
+            setBeer(result.data);
+            console.log(result.data);
+        });
+    }, []);
+
+    return (
+        <div className="beer-details-page">
+            {beer && (
+                <div>
+                    <img src={beer.image_url} alt={beer.name} />
+                    <h4>{beer.name}</h4>
+                    <span>{beer.attenuation_level}</span>
+                    <p>{beer.tagline}</p>
+                    <span>{beer.first_brewed}</span>
+                    <p>{beer.description}</p>
+                    <p>{beer.contributed_by}</p>
+                </div>
+            )}
+        </div>
+
+
+
+    )
+}
+
 
 export default RandomBeersPage;
